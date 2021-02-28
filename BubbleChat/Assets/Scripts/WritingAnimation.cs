@@ -13,11 +13,6 @@ public class WritingAnimation : MonoBehaviour
     public string fullText;
     string currentText = "";
 
-    void Start()
-    {
-        //StartCoroutine(ShowText());
-    }
-
     public IEnumerator ShowText()
     {
         for (int i = 0; i <= fullText.Length; i++)
