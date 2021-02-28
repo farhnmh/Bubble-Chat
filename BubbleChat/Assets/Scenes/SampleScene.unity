@@ -727,10 +727,11 @@ MonoBehaviour:
   sequence: 2
   pageSource: https://5e510330f2c0d300147c034c.mockapi.io/users
   got: 0
-  id: 
-  name: 
-  avatar: 
-  email: 
+  data:
+  - 
+  - 
+  - 
+  - 
 --- !u!1 &1347670577
 GameObject:
   m_ObjectHideFlags: 0

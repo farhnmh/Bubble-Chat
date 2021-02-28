@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 using SimpleJSON;
 
@@ -9,51 +10,57 @@ public class RequestData : MonoBehaviour
     public int sequence;
     public string pageSource;
     public bool got;
-
-    [Header("Struct Attribute")]
-    public string id;
-    public string name;
-    public string avatar;
-    public string email;
+    public List<string> data;
 
     void Start()
     {
-        WWW getting = new WWW(pageSource);
-        StartCoroutine(DataRequesting(getting));
+        StartCoroutine(DataRequesting(pageSource));
     }
 
-    IEnumerator DataRequesting(WWW gettingData)
+    IEnumerator DataRequesting(string gettingData)
     {
-        yield return gettingData;
+        using (UnityWebRequest webReq = UnityWebRequest.Get(gettingData))
+        {
+            yield return webReq.SendWebRequest();
 
-        id = GetterId(gettingData.text);
-        name = GetterName(gettingData.text);
-        avatar = GetterAvatar(gettingData.text);
-        email = GetterEmail(gettingData.text);
-        got = true;
+            if (webReq.isNetworkError || webReq.isHttpError)
+                Debug.Log("Error: " + webReq.error);
+            else
+                Debug.Log("Received: " + webReq.downloadHandler.text);
+
+            for (int i = 0; i < 4; i++)
+            {
+                data[i] = GetterData(i, webReq.downloadHandler.text);
+            }
+
+            got = true;
+        }
     }
 
-    public string GetterId(string data)
+    public string GetterData(int index, string data)
     {
+        string category = string.Empty;
         JSONArray DataArray = JSON.Parse(data).AsArray;
-        return DataArray[sequence]["id"].Value;
-    }
 
-    public string GetterName(string data)
-    {
-        JSONArray DataArray = JSON.Parse(data).AsArray;
-        return DataArray[sequence]["name"].Value;
-    }
+        switch (index)
+        {
+            case 0:
+                category = "id";
+                break;
 
-    public string GetterAvatar(string data)
-    {
-        JSONArray DataArray = JSON.Parse(data).AsArray;
-        return DataArray[sequence]["avatar"].Value;
-    }
-    
-    public string GetterEmail(string data)
-    {
-        JSONArray DataArray = JSON.Parse(data).AsArray;
-        return DataArray[sequence]["email"].Value;
+            case 1:
+                category = "name";
+                break;
+
+            case 2:
+                category = "avatar";
+                break;
+
+            case 3:
+                category = "email";
+                break;
+        }
+
+        return DataArray[sequence][category].Value;
     }
 }

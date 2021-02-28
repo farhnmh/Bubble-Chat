@@ -19,10 +19,11 @@ public class PersonalData : MonoBehaviour
         if (requesting.got)
         {
             human = new HumanStruct();
-            human.id = requesting.id;
-            human.name = requesting.name;
-            human.avatar = requesting.avatar;
-            human.email = requesting.email;
+
+            human.id = requesting.data[0];
+            human.name = requesting.data[1];
+            human.avatar = requesting.data[2];
+            human.email = requesting.data[3];
 
             writing.fullText =  "Hello guys!\n" + 
                                 "My name is\n" + human.name + "\n" + 
