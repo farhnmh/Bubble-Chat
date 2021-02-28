@@ -8,15 +8,17 @@ public class WritingAnimation : MonoBehaviour
 {
     [Header("General Attribute")]
     public float speed;
+    
+    [TextArea(5, 10)]
     public string fullText;
     string currentText = "";
 
     void Start()
     {
-        StartCoroutine(ShowText());
+        //StartCoroutine(ShowText());
     }
 
-    IEnumerator ShowText()
+    public IEnumerator ShowText()
     {
         for (int i = 0; i <= fullText.Length; i++)
         {

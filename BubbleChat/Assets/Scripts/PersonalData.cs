@@ -24,10 +24,13 @@ public class PersonalData : MonoBehaviour
             human.avatar = requesting.avatar;
             human.email = requesting.email;
 
-            bubbleText.SetActive(true);
             writing.fullText =  "Hello guys!\n" + 
                                 "My name is\n" + human.name + "\n" + 
                                 "and you can contact me on\n" + human.email;
+
+            bubbleText.SetActive(true);
+
+            StartCoroutine(writing.ShowText());
             requesting.got = false;
         }
     }
