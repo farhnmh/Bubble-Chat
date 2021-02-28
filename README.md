@@ -1,7 +1,7 @@
 # Bubble Chat JSON
 (Author) 4210181002 Farhan Muhammad
 
-(Course) Praktikum Desain Multiplayer Game Online
+(Course) Praktikum Desain Game Multiplayer Online
 
 ### Result File
 ![Result File](/BubbleChat.gif)
