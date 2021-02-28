@@ -11,7 +11,7 @@
 
 ### Code Description
 
-1. ([Request Data Code](BubbleChat/Assets/Scripts/RequestData.cs)) First, use SimpleJSON as a plugin to make a request to get data from the website
+1. ([Request Data Code](BubbleChat/Assets/Scripts/RequestData.cs)) First, use UnityWebRequest as a plugin to make a request to get data from the website and use SimpleJSON to parse the obtained data
 
 ![Request Data](/Screenshot Code/RequestData.png)
 
